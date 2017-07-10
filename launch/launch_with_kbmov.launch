@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+    <node name="osvr_server" pkg="rviz_plugin_osvr" type="start_osvr_server.sh" />
+	<node name="rviz" args="-l -d $(find kb_mover)/rviz/rviz_plugin_osvr.rviz" pkg="rviz" type="rviz" output="screen" />
+    <param name="robot_description" textfile="$(find kb_mover)/urdf/hydrogen.urdf"/>
+    <node pkg="tf" type="static_transform_publisher" name="camerafront_publisher" args="0.05 0 0 0 0 0 1 rviz_plugin_osvr/head frontframe 1" />
+    <node name="keyboard_event_publisher" pkg="keyboard_reader" type="keyboard_event_publisher" />
+    <node name="kb_mover" pkg="kb_mover" type="kb_mover" />
+</launch >

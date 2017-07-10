@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<robot name="pan_tilt">
+
+ <link name="base_link">
+<visual>
+      <geometry>
+	<cylinder length="1" radius="0.02"/>
+      </geometry>
+      <origin rpy="0 1.57075 0" xyz="0 0 0"/>
+      <material name="red">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <link name="left_atom_link">
+
+    <visual>
+      <geometry>
+	<sphere radius="0.5"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0.5 0 0"/>
+      <material name="yellow">
+        <color rgba="1 1 0 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="atombond1_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_atom_link"/>
+    <origin xyz="0.5 0 0"/>
+  </joint>
+
+<joint name="bondatom2_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_atom_link"/>
+    <origin xyz="-0.5 0 0"/>
+  </joint>
+
+<link name="right_atom_link">
+
+    <visual>
+      <geometry>
+	<sphere radius="0.5"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="-0.5 0 0"/>
+      <material name="yellow">
+        <color rgba="1 1 0 1"/>
+      </material>
+    </visual>
+  </link>
+
+</robot>
