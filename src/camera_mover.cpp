@@ -35,10 +35,12 @@ int main(int argc, char** argv) {
     while (ros::ok()){
         
         br.sendTransform(tf::StampedTransform(target, ros::Time::now(), "world", "camera_mount"));
-        if (last_key != 6) {//put a switch here after testing
+        if (last_key != 6) {
             tf::StampedTransform frontlook, wrld2cam; 
             tfer.lookupTransform("world", "frontframe", ros::Time(0), frontlook);
+            //in the above, what we care about is the rotation: rotation of the camerafront in relation to the world. AKA, the orientation of the camera, or where the user is looking.
             tfer.lookupTransform("world", "camera_mount", ros::Time(0), wrld2cam);
+            //and here the origin is the important part.
 
 
             tf::Vector3 intermediate;
@@ -56,7 +58,7 @@ int main(int argc, char** argv) {
                 case 5 : intermediate = tf::Vector3(0, 0, -1);
                          break;
             }
-            tf::quatRotate(frontlook.getRotation(), intermediate);
+            intermediate = tf::quatRotate(frontlook.getRotation(), intermediate);
             intermediate *= VELOCITY;
             target.setOrigin(wrld2cam.getOrigin() += intermediate);
 

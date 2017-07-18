@@ -6,4 +6,4 @@
     <node pkg="tf" type="static_transform_publisher" name="camerafront_publisher" args="0.05 0 0 0 0 0 1 rviz_plugin_osvr/head frontframe 1" />
     <node name="keyboard_event_publisher" pkg="keyboard_reader" type="keyboard_event_publisher" />
     <node name="kb_mover" pkg="kb_mover" type="kb_mover" />
-</launch >
+</launch>
